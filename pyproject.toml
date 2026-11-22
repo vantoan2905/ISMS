@@ -1,0 +1,40 @@
+[project]
+name = "industrial-safety-monitor"
+version = "0.1.0"
+description = "Camera based industrial safety monitoring"
+requires-python = ">=3.11,<3.15"
+dependencies = ["fastapi>=0.115", "uvicorn[standard]>=0.30", "pyyaml>=6", "opencv-python-headless>=4.10", "numpy>=1.26"]
+
+[project.optional-dependencies]
+yolo = ["ultralytics>=8.3"]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+native = [
+    "pybind11>=3",
+]
+pose = [
+    "onnxruntime>=1.32.0",
+    "rtmlib>=0.0.16",
+]
+training = [
+    "loguru>=0.8.0",
+    "psutil>=7.2.2",
+    "pycocotools>=2.0.11",
+    "tabulate>=0.10.0",
+    "tensorboard>=2.21.0",
+    "thop>=0.1.1.post2209072238",
+    "torch>=2.15.0",
+    "torchvision>=0.29.2",
+    "tqdm>=4.70.1",
+]

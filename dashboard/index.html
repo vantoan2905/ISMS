@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Industrial Safety Monitor</title>
+<style>body{font:16px system-ui;background:#101827;color:#e8eef7;max-width:900px;margin:40px auto;padding:0 20px}h1{margin-bottom:4px}p{color:#aab8cc}.status{padding:8px 12px;border-radius:6px;background:#253448;display:inline-block}table{width:100%;border-collapse:collapse;margin-top:24px}th,td{text-align:left;border-bottom:1px solid #34445a;padding:12px}th{color:#aab8cc}.alert{color:#ffb36b}</style></head>
+<body><h1>Industrial Safety Monitor</h1><p>Recent safety events</p><span class="status" id="status">Connecting…</span>
+<table><thead><tr><th>Time</th><th>Camera</th><th>Event</th><th>Track</th><th>Zone</th></tr></thead><tbody id="events"></tbody></table>
+<script>
+const rows=document.getElementById('events'),status=document.getElementById('status');
+const seen=new Set();function add(e){if(seen.has(e.id))return;seen.add(e.id);const tr=document.createElement('tr');
+for(const value of [new Date(e.timestamp).toLocaleString(),e.camera_id,e.type.replaceAll('_',' '),e.track_id,e.zone_id||'—']){const td=document.createElement('td');td.textContent=value;tr.append(td)}tr.children[2].className='alert';rows.prepend(tr);while(rows.children.length>100)rows.lastChild.remove()}
+fetch('/events').then(r=>r.json()).then(events=>events.reverse().forEach(add));
+function connect(){const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws/events');ws.onopen=()=>status.textContent='Live';ws.onmessage=message=>add(JSON.parse(message.data));ws.onclose=()=>{status.textContent='Reconnecting…';setTimeout(connect,2000)}}connect();
+</script></body></html>

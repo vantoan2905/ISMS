@@ -1,0 +1,18 @@
+cameras:
+  - id: demo
+    source: 0  # Webcam index, video path, or RTSP URL
+    enabled: false
+    zones:
+      - id: restricted
+        polygon: [[100, 100], [500, 100], [500, 400], [100, 400]]
+        restricted: true
+    helmet_required: true
+    relay_url: null  # Optional HTTP endpoint receiving POST JSON event payloads
+model:
+  weights: yolo11n.pt
+  confidence: 0.4
+  helmet_class: helmet  # Requires custom weights containing a helmet class
+storage:
+  path: safety_events.db
+rules:
+  cooldown_seconds: 10

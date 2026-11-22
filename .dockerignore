@@ -1,0 +1,10 @@
+.git
+.venv
+build
+__pycache__
+*.pyc
+*.so
+*.db
+*.mov
+*.yuv
+src/trackers.zip

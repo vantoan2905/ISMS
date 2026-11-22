@@ -1,0 +1,23 @@
+services:
+  monitor:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./configs:/app/configs:ro
+      - ./videos:/app/videos:ro
+      - ./models:/app/models:ro
+      - monitor-data:/app/data
+    environment:
+      SAFETY_CONFIG: /app/configs/cameras.yaml
+      SAFETY_DATABASE: /app/data/safety_events.db
+      SAFETY_RELAY_URL: http://relay:8001/events
+    depends_on:
+      - relay
+  relay:
+    build: .
+    command: ["uvicorn", "src.services.relay_simulator:app", "--host", "0.0.0.0", "--port", "8001"]
+    ports:
+      - "8001:8001"
+volumes:
+  monitor-data:

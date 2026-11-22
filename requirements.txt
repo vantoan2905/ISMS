@@ -1,0 +1,2 @@
+# uv is the primary dependency manager; this file supports pip deployments.
+-e .

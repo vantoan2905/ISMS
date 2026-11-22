@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.db
+videos/*
+!videos/.gitkeep
+*.pt
+
+/src/inference/core/_native*.so
+/build/
+/src/inference/core/build/
+
+# Local datasets, trained weights, and generated media
+/data/
+/models/
+*.mp4
+*.mov
+*.yuv
+*.zip
+*.onnx
+*.pth
+.env

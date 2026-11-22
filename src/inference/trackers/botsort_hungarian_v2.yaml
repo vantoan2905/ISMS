@@ -1,0 +1,46 @@
+defaults:
+  association:
+    track_high_thresh: 0.7
+    track_low_thresh: 0.1
+    new_track_thresh: 0.75
+    match_thresh: 0.8
+    second_match_thresh: 0.5
+    unconfirmed_match_thresh: 0.7
+    duplicate_iou_thresh: 0.15
+  lifecycle:
+    track_buffer: 15
+    track_buffer_seconds: null
+    fps: 10.0
+  proximity:
+    proximity_rescue: false
+    proximity_max_normalized_distance: 1.0
+  mask:
+    mask_conditioned_association: false
+    mask_enable_isolated_matching: false
+    mask_min_track_confidence: 0.6
+    mask_min_track_coverage: 0.9
+    mask_min_detection_precision: 0.05
+    mask_similarity_weight: 0.5
+    mask_collect_gate_samples: false
+    mask_resolution: 24
+  reid:
+    with_reid: false
+    reid_iou_gate: 0.5
+    reid_appearance_thresh: 0.25
+    reid_feature_alpha: 0.9
+  cmc:
+    cmc_method: none
+    cmc_downscale: 2
+  kalman:
+    kalman_dt: 1.0
+    kalman_std_weight_position: 0.05
+    kalman_std_weight_velocity: 0.00625
+  output:
+    match_iou: 0.3
+    enforce_match_iou: false
+  lineage:
+    lineage_enabled: false
+    lineage_max_seconds: 1.5
+    lineage_distance_scale: 1.0
+    max_tracking_distance: 120.0
+cameras: {}
