@@ -4,20 +4,24 @@ import logging
 from urllib.parse import urlsplit
 
 from .devices import Display, Speaker
+from .messages_vi import MESSAGES as VIETNAMESE_MESSAGES
 
 logger = logging.getLogger(__name__)
 
 MESSAGES = {
-    "ROI_ENTER": "Có người đi vào khu vực nguy hiểm.",
-    "ROI_OCCUPIED": "Có người trong khu vực nguy hiểm.",
-    "ROI_DWELL": "Có người ở trong khu vực nguy hiểm quá thời gian quy định.",
-    "NO_HELMET": "Phát hiện người có khả năng không đội mũ bảo hộ.",
+    "ROI_ENTER": "A person has entered a hazardous area.",
+    "ROI_OCCUPIED": "A person is in a hazardous area.",
+    "ROI_DWELL": "A person has remained in a hazardous area beyond the allowed time.",
+    "NO_HELMET": "A person may not be wearing a safety helmet.",
 }
 
 
 class AlertService:
-    def __init__(self, devices):
+    def __init__(self, devices, language="en"):
+        if language not in ("en", "vi"):
+            raise ValueError("alert_language must be en or vi")
         self.devices = devices
+        self.messages = MESSAGES if language == "en" else VIETNAMESE_MESSAGES
         self.worker = None
 
     @classmethod
@@ -33,7 +37,7 @@ class AlertService:
                 if url.scheme not in ("http", "https") or not url.hostname:
                     raise ValueError("Alert device endpoint must be an HTTP(S) URL")
             devices.append(adapters[item["type"]](item.get("name", item["type"]), endpoint))
-        return cls(devices)
+        return cls(devices, config.get("alert_language", "en"))
 
     def start(self, engine):
         if self.devices:
@@ -50,10 +54,10 @@ class AlertService:
     async def _run(self):
         while (event := await self.queue.get()) is not None:
             kind = event["type"]
-            if kind not in MESSAGES or (event["status"] != "ACTIVE" and kind != "ROI_DWELL"):
+            if kind not in self.messages or (event["status"] != "ACTIVE" and kind != "ROI_DWELL"):
                 continue
             payload = {key: event[key] for key in ("event_id", "camera_id", "track_id", "type", "severity")}
-            payload["text"] = f'{event["camera_id"]}: {MESSAGES[kind]}'
+            payload["text"] = f'{event["camera_id"]}: {self.messages[kind]}'
             await asyncio.gather(*(self._send(device, payload) for device in self.devices))
 
     async def _send(self, device, payload):
