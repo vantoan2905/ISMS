@@ -109,7 +109,7 @@ docker compose run --rm --service-ports \
 
 Open `http://localhost:8000/health` and `/docs`. Stop with `Ctrl+C`. The Compose environment sets `SAFETY_DATABASE=/app/data/safety_events.db` for the API, so incidents persist in the `monitor-data` named volume. Snapshots persist there only if `storage.snapshot_dir` is set as described. `docker compose run` starts the declared `relay` dependency; the MVP uses the in-process mock relay and does not route its events to that HTTP relay service through `SAFETY_RELAY_URL`.
 
-The image uses the Dockerfile's default CPU container configuration. GPU access needs separate container/runtime setup and has not been validated here. This Compose workflow could not be tested in the current WSL environment because Docker Desktop WSL integration is disabled.
+The image uses the Dockerfile's default CPU container configuration. GPU access needs separate container/runtime setup. The Compose workflow and GPU configuration have not been validated.
 
 ## 7. Tests and troubleshooting
 

@@ -24,27 +24,6 @@ flowchart TD
 - Artifact `models/helmet_classifier/flow_test/metrics.json` thiếu metadata checkpoint/backend. Tên folder không đủ để xác định model, và matrix chỉ tính trên dự đoán khớp nhãn. Cần chạy lại với cấu hình ghi nhận rõ để so sánh với flow hiện tại.
 - Video demo đánh giá định tính, chưa có nhãn để tính metric sự kiện. Số liệu có trong phần đánh giá bên dưới.
 
-## Phần điền lý do lựa chọn
-
-### Vì sao chọn RTMO-m cho pose?
-
-> **Tôi lựa chọn RTMO-m vì:** ........................................................  
-> **So sánh với model khác và căn cứ:** ..............................................  
-> **Trade-off về độ chính xác, tốc độ và phần cứng:** ................................
-
-### Vì sao chọn EfficientNet-B0 cho classifier?
-
-> **Tôi lựa chọn EfficientNet-B0 vì:** ...............................................  
-> **Metric / thí nghiệm dùng để so sánh:** ...........................................  
-> **Trade-off và hạn chế trên ảnh crop từ pose:** ....................................
-
-### Vì sao chọn centroid tracker và GStreamer?
-
-> **Lý do:** .........................................................................  
-> **Giới hạn và phương án thay thế:** ................................................
-
----
-
 # Kết quả đánh giá theo model và dữ liệu
 
 ## Phạm vi và cách đọc
@@ -80,7 +59,7 @@ Split gồm 5.457 image ID train, 607 validation và 1.517 test, được đếm
 | Validation | 195 | 219 |
 | Test | 97 | 120 |
 
-Số liệu lấy từ các file `_annotations.coco.json` trong `data/helmet`. Hai category ID trong annotation cùng mang tên `helmet`; biểu đồ đếm tổng annotation. Bộ này được trình bày để mô tả dữ liệu hiện có, không phải nguồn crop VOC dùng để huấn luyện ba classifier ở phần trên. Thư mục dữ liệu Hard_Hat và yolox_hard_hat hiện không có trong workspace nên chưa thể dựng biểu đồ phân bố từ annotation gốc.
+Số liệu lấy từ các file `_annotations.coco.json` trong `data/helmet`. Hai category ID trong annotation cùng mang tên `helmet`; biểu đồ đếm tổng annotation. Bộ này được trình bày để mô tả dữ liệu hiện có, không phải nguồn crop VOC dùng để huấn luyện ba classifier ở phần trên. Chưa có biểu đồ phân bố Hard_Hat và yolox_hard_hat từ annotation gốc.
 
 ## EfficientNet-B0 — VOC2028 crop test
 

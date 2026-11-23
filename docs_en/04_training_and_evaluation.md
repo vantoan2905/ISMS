@@ -23,25 +23,6 @@ YOLOX annotations were converted from Hard_Hat, retaining the source splits and 
 
 Classifier crops use VOC2028 train/validation/test image IDs, annotation boxes, 128×128 resizing and weighted sampling. The training script initializes the classifiers without pretrained weights. The earlier `flow_test` artifact lacks backend and checkpoint metadata, so it cannot be attributed to a specific model. Demo videos have no event ground truth and are qualitative tests.
 
-## Model selection rationale — to be completed
-
-### Why RTMO-m for pose?
-
-> **Reason:** ........................................................................  
-> **Comparison and evidence:** .......................................................  
-> **Accuracy, speed and hardware trade-offs:** .......................................
-
-### Why EfficientNet-B0 for classification?
-
-> **Reason:** ........................................................................  
-> **Metrics or experiments used for comparison:** ....................................  
-> **Trade-offs and limitations on pose-derived crops:** ..............................
-
-### Why a centroid tracker and GStreamer?
-
-> **Reason:** ........................................................................  
-> **Limitations and alternatives:** ..................................................
-
 # Evaluation by Model and Dataset
 
 ## Scope
@@ -76,7 +57,7 @@ There are 5,457 train, 607 validation and 1,517 test image IDs, counted from `da
 | Validation | 195 | 219 |
 | Test | 97 | 120 |
 
-Counts come from the `_annotations.coco.json` files under `data/helmet`. Two category IDs have the same `helmet` name; the chart counts all annotations. This describes available data and is not the VOC crop source used for the three classifiers. `Hard_Hat` and `yolox_hard_hat` data folders are currently absent, so their distributions cannot be plotted from original annotations.
+Counts come from the `_annotations.coco.json` files under `data/helmet`. Two category IDs have the same `helmet` name; the chart counts all annotations. This describes available data and is not the VOC crop source used for the three classifiers. Distribution charts based on the original `Hard_Hat` and `yolox_hard_hat` annotations are not available.
 
 ## EfficientNet-B0 — VOC2028 test crops
 

@@ -107,7 +107,7 @@ docker compose run --rm --service-ports \
 
 Mở `http://localhost:8000/health` và `/docs`, dừng bằng `Ctrl+C`. Compose đặt `SAFETY_DATABASE=/app/data/safety_events.db` cho API nên lịch sử nằm trong named volume `monitor-data`. Snapshot chỉ nằm trong volume nếu cấu hình `storage.snapshot_dir` như trên. `docker compose run` khởi động dependency `relay`; flow MVP dùng mock relay trong process và không gửi event tới relay HTTP qua `SAFETY_RELAY_URL`.
 
-Cấu hình container mặc định chạy CPU; GPU cần cấu hình runtime/device riêng và chưa được kiểm thử. Quy trình Compose chưa thể chạy thử trong WSL hiện tại vì Docker Desktop chưa bật WSL integration.
+Cấu hình container mặc định chạy CPU; GPU cần cấu hình runtime/device riêng. Quy trình Compose và cấu hình GPU chưa được kiểm thử.
 
 ## 7. Kiểm thử và xử lý lỗi
 

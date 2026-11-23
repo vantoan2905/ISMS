@@ -28,7 +28,7 @@ Các điều kiện dưới đây được đặt ra cho phương án thiết k�
 | Cảnh báo | Event được đưa tới alert service, sau đó gọi module loa cảnh báo hoặc thiết bị hiển thị theo cấu hình. |
 | Thiết bị điều khiển | Khi xâm nhập vùng nguy hiểm, relay được mô phỏng bằng trạng thái phần mềm. |
 
-GPU RTX 5060 và khả năng vận hành các luồng RTSP là giả định cho phương án; thông tin GPU không được xác minh trong phiên kiểm tra vì hệ điều hành chặn truy cập NVML. Mức 4K/25 FPS là đầu vào giả lập, không phải cam kết FPS xử lý của hệ thống. Với demo hiện tại, nguồn trong cấu hình là MP4 và có clip dọc 30 FPS; frame được resize về kích thước cấu hình trước khi inference.
+GPU RTX 5060 và các luồng RTSP là điều kiện giả định cho phương án triển khai. Mức 4K/25 FPS là đầu vào giả lập, không phải cam kết FPS xử lý của hệ thống. Với demo hiện tại, nguồn trong cấu hình là MP4 và có clip dọc 30 FPS; frame được resize về kích thước cấu hình trước khi inference.
 
 ## Bước 3. Cách tiếp cận thuật toán
 

@@ -24,7 +24,7 @@ The system is divided into video ingestion, person detection and tracking, ROI a
 | Alerts | Events are sent to the alert service, which calls a speaker or display adapter. |
 | Control | Intrusion activates a simulated relay. |
 
-The GPU and RTSP environment are deployment assumptions. GPU identity was not verified because the OS blocked NVML access. 4K/25 FPS describes the assumed source, not a measured processing rate. The present demo uses MP4 files, including portrait 30 FPS footage, and resizes frames before inference.
+The RTX 5060 GPU and RTSP streams are assumed deployment conditions. 4K/25 FPS describes the assumed source, not a measured processing rate. The present demo uses MP4 files, including portrait 30 FPS footage, and resizes frames before inference.
 
 ## 3. Algorithm approach
 
