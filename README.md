@@ -79,3 +79,22 @@ at creation. Set `alert_devices: []` to disable announcements. Delivery uses
 the bounded event subscription. Under overload it can drop older updates.
 Device failures are logged without retry. The incident history remains in SQLite.
 
+## License
+
+Original project code that the copyright holder has authority to license is
+available under the [GNU General Public License version 3.0 only](LICENSE),
+except for `src/inference/trackers/`, which is governed by its own
+[restricted-use notice](src/inference/trackers/LICENSE). Third-party source,
+dependencies, models and datasets remain subject to their respective licenses
+and are not relicensed by this statement.
+
+GPL-3.0 permits use, copying, modification and commercial use of covered code.
+When distributing a modified GPL-covered work, provide the corresponding source
+code to recipients under GPL-3.0, as required by the license. Private changes and
+ordinary network use alone do not trigger source distribution under GPL-3.0.
+
+Using or distributing the tracker requires the permissions described in its
+separate notice. Combining separately licensed tracker code with GPL-covered
+code may require additional rights and license-compatibility review; this notice
+does not grant permission to combine incompatible components. For tracker
+licensing, contact **vantoan0807s@gmail.com**.
