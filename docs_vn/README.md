@@ -4,6 +4,6 @@
 2. [Sequence thuật toán từng camera](03_camera_sequences.md)
 3. [Train, test, lý do chọn model và kết quả đánh giá](04_training_and_evaluation.md)
 
-Các biểu đồ được lưu trong `docs/charts`. Các artifact nguồn trong `models/` và dataset trong `data/` hiện bị Git bỏ qua, cần đính kèm khi chia sẻ để tái lập kết quả.
+Các biểu đồ được lưu trong `docs_vn/charts`. Các artifact nguồn trong `models/` và dataset trong `data/` hiện bị Git bỏ qua, cần đính kèm khi chia sẻ để tái lập kết quả.
 
-[English documentation](en/README.md)
+[English documentation](../docs_en/README.md)

@@ -170,7 +170,7 @@ For a new `NO_HELMET`, `ROI_ENTER`, `ROI_OCCUPIED` or `ROI_DWELL`, the engine cr
 
 ### Alerts and mock relay
 
-The dispatcher fans incident updates out to bounded subscriber queues. The alert service selects `ROI_ENTER`, `ROI_OCCUPIED`, `ROI_DWELL` and `NO_HELMET` and creates a Vietnamese announcement. Display and speaker adapters use `display_text` and `speak` actions. With an endpoint, the adapter sends HTTP JSON containing the event and announcement. Otherwise it logs the simulated action. Individual device failures are logged, with no retry; a full subscriber queue may drop older updates.
+The dispatcher fans incident updates out to bounded subscriber queues. The alert service selects `ROI_ENTER`, `ROI_OCCUPIED`, `ROI_DWELL` and `NO_HELMET` and creates an English announcement by default; `alert_language: vi` selects Vietnamese. Display and speaker adapters use `display_text` and `speak` actions. With an endpoint, the adapter sends HTTP JSON containing the event and announcement. Otherwise it logs the simulated action. Individual device failures are logged, with no retry; a full subscriber queue may drop older updates.
 
 The mock relay is on while any `ROI_ENTER` or `ROI_OCCUPIED` incident remains active. A helmet incident alone does not turn it on. Camera failure retains active state, while track timeout can lead to an exit observation. The relay is a software state.
 

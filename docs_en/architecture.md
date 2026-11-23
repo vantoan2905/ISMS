@@ -2,26 +2,26 @@
 
 ```mermaid
 flowchart TB
-    subgraph sources["Nguồn video / camera"]
+    subgraph sources["Video sources / cameras"]
         C1["CAM-01: video 1"]
         C2["CAM-02: video 2"]
         C3["CAM-03: video 3"]
     end
 
-    CFG["Cấu hình camera, ROI và model"]
-    subgraph central["Ứng dụng ISMS"]
+    CFG["Camera, ROI and model configuration"]
+    subgraph central["ISMS application"]
         CM["Camera manager"]
-        GST["GStreamer appsink<br/>decode, chuyển BGR và lấy PTS"]
-        Q["Hàng đợi giới hạn riêng cho từng camera<br/>bỏ frame cũ khi quá tải"]
-        EX["Inference executor dùng chung"]
-        POSE["RTMO-m<br/>bbox người + keypoints"]
-        TRACK["Tracker riêng từng camera"]
-        CROP["Crop vùng đầu từ pose"]
+        GST["GStreamer appsink<br/>decode, convert to BGR and obtain PTS"]
+        Q["Per-camera bounded frame queue<br/>drop older frames under load"]
+        EX["Shared inference executor"]
+        POSE["RTMO-m<br/>person boxes + keypoints"]
+        TRACK["Per-camera tracker"]
+        CROP["Head crop from pose"]
         HELMET["EfficientNet-B0<br/>HELMET / NO_HELMET / UNKNOWN"]
         ROI["ROI entry / exit / dwell"]
         RULES["Observations"]
-        EVENT["Event engine<br/>lifecycle + chống trùng"]
-        OVERLAY["Vẽ bbox, keypoints, ROI và trạng thái"]
+        EVENT["Event engine<br/>lifecycle + deduplication"]
+        OVERLAY["Draw boxes, keypoints, ROI and status"]
     end
 
     DB[("SQLite incidents")]

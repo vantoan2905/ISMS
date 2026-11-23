@@ -1,6 +1,6 @@
 # Industrial Safety Monitoring System
 
-Tài liệu chính: [Cách tiếp cận bài toán và thiết kế hệ thống](docs/00_problem_approach.md).
+Documentation: [English](docs_en/README.md) | [Tiếng Việt](docs_vn/README.md)
 
 This MVP runs three camera sources through GStreamer, shared RTMO-m pose inference, camera-local tracking and configurable helmet and ROI rules. EfficientNet-B0 classifies pose-derived head crops. Events are saved in SQLite with snapshots; ROI occupancy drives a shared mock relay.
 
@@ -72,12 +72,14 @@ alert_devices:
   - {type: speaker, name: workshop_speaker}
 ```
 
-Commands include `action` (`display_text` or `speak`), `device`, Vietnamese
+Commands include `action` (`display_text` or `speak`), `device`, announcement
 `text`, `event_id`, `camera_id`, `track_id`, `type` and `severity`. The service
 announces a new intrusion, occupancy, dwell or missing-helmet incident once
 at creation. Set `alert_devices: []` to disable announcements. Delivery uses
 the bounded event subscription. Under overload it can drop older updates.
 Device failures are logged without retry. The incident history remains in SQLite.
+English is the default announcement language. Set `alert_language: vi` in
+`configs/cameras.yaml` to send Vietnamese text instead; use `en` for English.
 
 ## License
 

@@ -224,7 +224,7 @@ flowchart TB
 
 #### Alert và thiết bị
 
-- Dispatcher gửi bản sao event tới queue của mỗi subscriber. Alert service lọc `ROI_ENTER`, `ROI_OCCUPIED`, `ROI_DWELL` và `NO_HELMET`, sau đó tạo nội dung tiếng Việt theo camera.
+- Dispatcher gửi bản sao event tới queue của mỗi subscriber. Alert service lọc `ROI_ENTER`, `ROI_OCCUPIED`, `ROI_DWELL` và `NO_HELMET`, sau đó tạo nội dung tiếng Anh theo camera. Cấu hình `alert_language: vi` để dùng tiếng Việt.
 - Adapter `display` dùng action `display_text`, adapter `speaker` dùng `speak`. Nếu cấu hình `endpoint`, adapter gửi HTTP POST JSON gồm event ID, camera, track, loại event, severity, nội dung và action. Nếu không có endpoint, adapter ghi log mô phỏng.
 - Lỗi một thiết bị được ghi log và không chặn thiết bị khác. Chưa có cơ chế retry; subscriber queue có giới hạn và có thể bỏ cập nhật cũ khi quá tải.
 
