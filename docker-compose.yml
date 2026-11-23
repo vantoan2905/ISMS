@@ -5,7 +5,7 @@ services:
       - "8000:8000"
     volumes:
       - ./configs:/app/configs:ro
-      - ./videos:/app/videos:ro
+      - ./videos:/app/videos
       - ./models:/app/models:ro
       - monitor-data:/app/data
     environment:

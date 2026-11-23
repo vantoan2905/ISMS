@@ -1,0 +1,2 @@
+pose: models/rtmo_m/rtmo_m_640x640_coco.onnx
+helmet_classifier: models/helmet_classifier_efficientnet/best.pt

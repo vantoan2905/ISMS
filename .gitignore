@@ -21,3 +21,4 @@ videos/*
 *.onnx
 *.pth
 .env
+/snapshots/
