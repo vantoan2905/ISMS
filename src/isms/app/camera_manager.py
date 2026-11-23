@@ -2,6 +2,7 @@
 import asyncio
 import logging
 
+from ..alert.service import AlertService
 from ..inference.executor import InferenceExecutor
 from .camera_runtime import run_camera
 
@@ -16,6 +17,7 @@ class CameraManager:
         self.camera_runner = camera_runner or run_camera
         self.stop = asyncio.Event()
         self.tasks = []
+        self.alerts = AlertService.from_config(config)
 
     async def start(self):
         cameras = [camera for camera in self.config['cameras'] if camera.get('enabled', True)]
@@ -32,6 +34,7 @@ class CameraManager:
                 logger.exception('Camera %s failed', camera['id'])
                 await self.engine.offline(camera['id'], exc)
 
+        self.alerts.start(self.engine)
         self.tasks = [asyncio.create_task(guarded(camera), name=camera['id']) for camera in cameras]
 
     async def close(self):
@@ -40,3 +43,4 @@ class CameraManager:
             if not task.done():
                 task.cancel()
         await asyncio.gather(*self.tasks, return_exceptions=True)
+        await self.alerts.close(self.engine)

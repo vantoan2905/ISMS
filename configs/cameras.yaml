@@ -1,6 +1,9 @@
 runtime:
   max_frame_queue: 3
   enable_mock_relay: true
+alert_devices:
+  - {type: display, name: factory_screen}
+  - {type: speaker, name: factory_speaker}
 model_config: models.yaml
 storage:
   path: safety_events.db
