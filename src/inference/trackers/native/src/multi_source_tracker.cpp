@@ -1,10 +1,10 @@
-#include "botsort_v2/multi_source_tracker.hpp"
+#include "botsort/multi_source_tracker.hpp"
 
 #include <algorithm>
 #include <array>
 #include <cmath>
 
-namespace botsort_v2 {
+namespace botsort {
 
 MultiSourceTracker::MultiSourceTracker(Settings defaults) : defaults_(std::move(defaults)) {}
 
@@ -230,4 +230,4 @@ std::vector<Assignment> MultiSourceTracker::update(int source_id, double frame_n
   return assignments;
 }
 
-}  // namespace botsort_v2
+}  // namespace botsort

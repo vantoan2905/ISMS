@@ -10,7 +10,7 @@
 
 #include <Eigen/Dense>
 
-namespace botsort_v2 {
+namespace botsort {
 
 using KalmanMean = Eigen::Matrix<double, 8, 1>;
 using KalmanCov = Eigen::Matrix<double, 8, 8>;
@@ -110,4 +110,4 @@ class KalmanFilterXYWH {
   Eigen::Matrix<double, 4, 8> update_mat_;
 };
 
-}  // namespace botsort_v2
+}  // namespace botsort

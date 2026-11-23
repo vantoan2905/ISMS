@@ -9,7 +9,7 @@
 //
 // OpenCV is only included by src/gmc.cpp, so this header (and everything that
 // includes it) stays OpenCV-free. When the library is built without OpenCV
-// (BOTSORT_V2_CMC=OFF), cmc_available() is false and only CmcMethod::None works.
+// (BOTSORT_CMC=OFF), cmc_available() is false and only CmcMethod::None works.
 #pragma once
 
 #include <array>
@@ -17,7 +17,7 @@
 #include <memory>
 #include <string>
 
-namespace botsort_v2 {
+namespace botsort {
 
 // Row-major 2x3 affine warp: x' = a*x + b*y + tx, y' = c*x + d*y + ty,
 // stored as {a, b, tx, c, d, ty}.
@@ -73,4 +73,4 @@ class GlobalMotionCompensation {
   std::unique_ptr<Impl> impl_;
 };
 
-}  // namespace botsort_v2
+}  // namespace botsort

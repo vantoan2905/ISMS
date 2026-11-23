@@ -1,4 +1,4 @@
-#include "botsort_v2/settings.hpp"
+#include "botsort/settings.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -7,7 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace botsort_v2 {
+namespace botsort {
 namespace {
 
 enum class Kind { Real, Fraction, Int, Bool };
@@ -163,7 +163,7 @@ void apply_options(Settings &settings, const YAML::Node &options, const std::str
       if (method != CmcMethod::None && !cmc_available()) {
         throw std::invalid_argument(label + ": '" + value.Scalar() +
                                     "' needs OpenCV, but the tracker was built with "
-                                    "BOTSORT_V2_CMC=OFF");
+                                    "BOTSORT_CMC=OFF");
       }
       settings.cmc_method = method;
       continue;
@@ -292,4 +292,4 @@ ConfigFile load_config_file(const std::string &path) {
   return parse_config(root, path);
 }
 
-}  // namespace botsort_v2
+}  // namespace botsort

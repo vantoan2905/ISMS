@@ -1,6 +1,6 @@
-// Standalone v2 tracker run, no Python: CSV detections in, CSV assignments out.
+// Standalone native tracker run, no Python: CSV detections in, CSV assignments out.
 //
-//   botsort_v2_track CONFIG.yaml [CAMERA] < detections.csv > tracks.csv
+//   botsort_track CONFIG.yaml [CAMERA] < detections.csv > tracks.csv
 //
 // Input rows:  source_id,frame_number,left,top,width,height,score,class_id[,e0,e1,...]
 //              (trailing columns, when present, are the detection's ReID
@@ -25,10 +25,10 @@
 #include <string>
 #include <vector>
 
-#include "botsort_v2/multi_source_tracker.hpp"
-#include "botsort_v2/settings.hpp"
+#include "botsort/multi_source_tracker.hpp"
+#include "botsort/settings.hpp"
 
-using namespace botsort_v2;
+using namespace botsort;
 
 namespace {
 

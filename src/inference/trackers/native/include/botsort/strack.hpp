@@ -10,7 +10,7 @@
 #include "gmc.hpp"
 #include "kalman_filter_xywh.hpp"
 
-namespace botsort_v2 {
+namespace botsort {
 
 enum class TrackState { New, Tracked, Lost, Removed };
 
@@ -193,4 +193,4 @@ class STrack {
   std::vector<float> smooth_feat_;
 };
 
-}  // namespace botsort_v2
+}  // namespace botsort

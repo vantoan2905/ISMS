@@ -9,12 +9,12 @@ import sys
 import cv2
 import numpy as np
 
-from .config import (
+from .tracker_config import (
     DEFAULT_BOTSORT_MATCH_IOU,
     DEFAULT_TRACKING_MAX_AGE,
 )
 from .registry import TRACKER_REGISTRY
-from .base import TrackAssignment, Tracker
+from .tracker_base import TrackAssignment, Tracker
 
 _NATIVE_DIR = Path(__file__).resolve().parents[3] / "build" / "botsort_native"
 

@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from .config import is_valid_object_id
+from .tracker_config import is_valid_object_id
 from .registry import TRACKER_REGISTRY
-from .base import TrackAssignment, Tracker
+from .tracker_base import TrackAssignment, Tracker
 
 
 @TRACKER_REGISTRY.register("passthrough")

@@ -9,7 +9,7 @@
 
 #include "bot_sort_tracker.hpp"
 
-namespace botsort_v2 {
+namespace botsort {
 
 struct Settings {
   // Association, lifecycle, mask, proximity and Kalman options of the core tracker.
@@ -70,4 +70,4 @@ struct ConfigFile {
 ConfigFile parse_config(const YAML::Node &root, const std::string &where);
 ConfigFile load_config_file(const std::string &path);
 
-}  // namespace botsort_v2
+}  // namespace botsort

@@ -11,22 +11,22 @@ import numpy as np
 import yaml
 
 from .registry import TRACKER_REGISTRY
-from .base import TrackAssignment, Tracker
+from .tracker_base import TrackAssignment, Tracker
 
 _REPO = Path(__file__).resolve().parents[3]
-_NATIVE_DIR = _REPO / "build" / "botsort_native_v2"
-DEFAULT_CONFIG_PATH = Path(__file__).resolve().parent / "botsort_hungarian_v2.yaml"
+_NATIVE_DIR = _REPO / "build" / "botsort_native"
+DEFAULT_CONFIG_PATH = Path(__file__).resolve().parent / "native_tracker.yaml"
 
 
 def _import_native():
     if str(_NATIVE_DIR) not in sys.path:
         sys.path.insert(0, str(_NATIVE_DIR))
     try:
-        import botsort_native_v2 as native  # noqa: E402
+        import botsort_native as native  # noqa: E402
     except ImportError as exc:  # pragma: no cover - depends on the build step
         raise ImportError(
-            "botsort_native_v2 is not built. Run src/inference/trackers/botsort_native_v2/build.sh "
-            "before using botsort_hungarian_v2 (looked in {}).".format(_NATIVE_DIR)
+            "botsort_native is not built. Run src/inference/trackers/native/build.sh "
+            "before using botsort_native (looked in {}).".format(_NATIVE_DIR)
         ) from exc
     return native
 
@@ -43,8 +43,8 @@ def _cameras_section(path):
     return cameras
 
 
-@TRACKER_REGISTRY.register("botsort_hungarian_v2")
-class BotSortHungarianV2Tracker(Tracker):
+@TRACKER_REGISTRY.register("botsort_native")
+class NativeBotSortTracker(Tracker):
     """Apply YAML defaults followed by global and source-specific overrides."""
 
     wants_low_confidence_detections = True

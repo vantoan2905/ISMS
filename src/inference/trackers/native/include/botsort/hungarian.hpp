@@ -7,7 +7,7 @@
 #include <limits>
 #include <vector>
 
-namespace botsort_v2 {
+namespace botsort {
 
 // Solves min-cost assignment for a cost matrix with `rows` rows and `cols`
 // columns (rows may be <= or > cols). Returns, for each row, the assigned
@@ -148,4 +148,4 @@ inline AssignmentResult linear_assignment(const std::vector<std::vector<double>>
   return result;
 }
 
-}  // namespace botsort_v2
+}  // namespace botsort

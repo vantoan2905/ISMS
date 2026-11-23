@@ -16,7 +16,7 @@
 #include "kalman_filter_xywh.hpp"
 #include "strack.hpp"
 
-namespace botsort_v2 {
+namespace botsort {
 
 inline double iou(const std::array<double, 4> &a, const std::array<double, 4> &b) {
   double ax1 = a[0], ay1 = a[1], ax2 = a[0] + a[2], ay2 = a[1] + a[3];
@@ -690,4 +690,4 @@ class BotSortTracker {
   mutable std::vector<MaskGateSample> mask_samples_;
 };
 
-}  // namespace botsort_v2
+}  // namespace botsort

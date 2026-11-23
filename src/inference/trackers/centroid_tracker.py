@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 
 from .registry import TRACKER_REGISTRY
-from .base import MatchingTracker
+from .tracker_base import MatchingTracker
 
 
 @TRACKER_REGISTRY.register("centroid")

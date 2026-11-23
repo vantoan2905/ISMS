@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
-# Configure + build the BoT-SORT v2 tracker (library, standalone runner, Python module).
-# Output goes to <repo>/build/botsort_native_v2.
+# Configure + build the BoT-SORT tracker (library, standalone runner, Python module).
+# Output goes to <repo>/build/botsort_native.
 #
 # The Python module is built against PYTHON (default: the active env's python3),
-# which must be the interpreter that runs the pipeline. BOTSORT_V2_PYTHON=OFF builds
-# only the C++ library and botsort_v2_track.
+# which must be the interpreter that runs the pipeline. BOTSORT_PYTHON=OFF builds
+# only the C++ library and botsort_track.
 #
 # Camera motion compensation (CMC) needs OpenCV. A minimal *static* OpenCV
 # (core, imgproc, video, calib3d and their dependencies, no I/O backends) is built
 # once into <repo>/build/opencv_static and reused: it has to be static for the same
 # reason yaml-cpp is (the module keeps its own libstdc++, see CMakeLists.txt).
-# It lives outside build/botsort_native_v2 so wiping the tracker build does not
-# rebuild OpenCV. BOTSORT_V2_CMC=OFF skips OpenCV (cmc_method must then be none);
+# It lives outside build/botsort_native so wiping the tracker build does not
+# rebuild OpenCV. BOTSORT_CMC=OFF skips OpenCV (cmc_method must then be none);
 # OPENCV_DIR=<dir with OpenCVConfig.cmake> uses an existing static build instead.
 set -euo pipefail
 cd "$(dirname "$0")"
 REPO_BUILD="$(cd ../../../.. && pwd)/build"
-BUILD_DIR="$REPO_BUILD/botsort_native_v2"
+BUILD_DIR="$REPO_BUILD/botsort_native"
 
 PYTHON="${PYTHON:-$(command -v python3)}"
-WITH_PYTHON="${BOTSORT_V2_PYTHON:-ON}"
-WITH_CMC="${BOTSORT_V2_CMC:-ON}"
+WITH_PYTHON="${BOTSORT_PYTHON:-ON}"
+WITH_CMC="${BOTSORT_CMC:-ON}"
 OPENCV_VERSION="${OPENCV_VERSION:-4.10.0}"
 if [[ "$WITH_PYTHON" == "ON" ]]; then
     echo "Building against: $("$PYTHON" -c 'import sys; print(sys.executable, sys.version.split()[0])')"
@@ -58,7 +58,7 @@ build_static_opencv() {
     OPENCV_DIR="$(dirname "$(find "$prefix" -name OpenCVConfig.cmake | head -1)")"
 }
 
-CMC_ARGS=(-DBOTSORT_V2_CMC="$WITH_CMC")
+CMC_ARGS=(-DBOTSORT_CMC="$WITH_CMC")
 if [[ "$WITH_CMC" == "ON" ]]; then
     if [[ -z "${OPENCV_DIR:-}" ]]; then
         build_static_opencv
@@ -67,9 +67,9 @@ if [[ "$WITH_CMC" == "ON" ]]; then
 fi
 
 cmake -S . -B "$BUILD_DIR" -DCMAKE_BUILD_TYPE=Release \
-    -DPython3_EXECUTABLE="$PYTHON" -DBOTSORT_V2_PYTHON="$WITH_PYTHON" "${CMC_ARGS[@]}"
+    -DPython3_EXECUTABLE="$PYTHON" -DBOTSORT_PYTHON="$WITH_PYTHON" "${CMC_ARGS[@]}"
 cmake --build "$BUILD_DIR" -j"$(nproc)"
 
 echo
 echo "Built:"
-ls -1 "$BUILD_DIR"/botsort_v2_track "$BUILD_DIR"/botsort_native_v2*.so 2>/dev/null || true
+ls -1 "$BUILD_DIR"/botsort_track "$BUILD_DIR"/botsort_native*.so 2>/dev/null || true

@@ -1,18 +1,18 @@
-#include "botsort_v2/gmc.hpp"
+#include "botsort/gmc.hpp"
 
 #include <algorithm>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
-#ifdef BOTSORT_V2_HAS_OPENCV
+#ifdef BOTSORT_HAS_OPENCV
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/video/tracking.hpp>
 #endif
 
-namespace botsort_v2 {
+namespace botsort {
 
 CmcMethod parse_cmc_method(const std::string &name) {
   if (name == "none") return CmcMethod::None;
@@ -33,7 +33,7 @@ std::string cmc_method_name(CmcMethod method) {
   }
 }
 
-#ifdef BOTSORT_V2_HAS_OPENCV
+#ifdef BOTSORT_HAS_OPENCV
 
 bool cmc_available() { return true; }
 
@@ -164,7 +164,7 @@ void GlobalMotionCompensation::reset() {
   impl_->prev_points.clear();
 }
 
-#else  // !BOTSORT_V2_HAS_OPENCV
+#else  // !BOTSORT_HAS_OPENCV
 
 bool cmc_available() { return false; }
 
@@ -174,7 +174,7 @@ GlobalMotionCompensation::GlobalMotionCompensation(CmcMethod method, int /*downs
     : method_(method), impl_(std::make_unique<Impl>()) {
   if (method != CmcMethod::None) {
     throw std::invalid_argument("cmc_method '" + cmc_method_name(method) +
-                                "' needs OpenCV; this build has BOTSORT_V2_CMC=OFF");
+                                "' needs OpenCV; this build has BOTSORT_CMC=OFF");
   }
 }
 
@@ -189,4 +189,4 @@ GlobalMotionCompensation::GlobalMotionCompensation(GlobalMotionCompensation &&) 
 GlobalMotionCompensation &GlobalMotionCompensation::operator=(GlobalMotionCompensation &&) noexcept =
     default;
 
-}  // namespace botsort_v2
+}  // namespace botsort

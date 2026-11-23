@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-from .config import (
+from .tracker_config import (
     DEFAULT_FPS,
     DEFAULT_TRACKING_DISTANCE,
     DEFAULT_TRACKING_MAX_AGE,

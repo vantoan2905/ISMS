@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from .config import (
+from .tracker_config import (
     DEFAULT_FPS,
     DEFAULT_TRACKING_DISTANCE,
     DEFAULT_TRACKING_MAX_AGE,
 )
 from .registry import TRACKER_REGISTRY
-from .base import MatchingTracker
+from .tracker_base import MatchingTracker
 
 
 def _bbox_iou(a, b):

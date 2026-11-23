@@ -1,4 +1,4 @@
-// Python binding of the v2 tracker (module botsort_native_v2). It is a thin
+// Python binding of the native tracker (module botsort_native). It is a thin
 // adapter: options cross as Python dicts and are converted to YAML nodes, so the
 // C++ loader is the only place that knows option names, defaults and checks.
 
@@ -10,11 +10,11 @@
 #include <string>
 #include <vector>
 
-#include "botsort_v2/multi_source_tracker.hpp"
-#include "botsort_v2/settings.hpp"
+#include "botsort/multi_source_tracker.hpp"
+#include "botsort/settings.hpp"
 
 namespace py = pybind11;
-using namespace botsort_v2;
+using namespace botsort;
 
 namespace {
 
@@ -80,8 +80,8 @@ FrameHolder frame_input(const py::object &frame) {
 
 }  // namespace
 
-PYBIND11_MODULE(botsort_native_v2, m) {
-  m.doc() = "BoT-SORT tracker v2: C++ multi-source tracker configured from YAML";
+PYBIND11_MODULE(botsort_native, m) {
+  m.doc() = "BoT-SORT tracker: C++ multi-source tracker configured from YAML";
 
   py::register_exception<std::invalid_argument>(m, "TrackerConfigError", PyExc_ValueError);
 

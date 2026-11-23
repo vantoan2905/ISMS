@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 
 from .registry import TRACKER_REGISTRY
-from .base import TrackAssignment, Tracker
+from .tracker_base import TrackAssignment, Tracker
 
 
 def _bbox_iou(a, b):

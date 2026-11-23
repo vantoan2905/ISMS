@@ -12,7 +12,7 @@
 #include "bot_sort_tracker.hpp"
 #include "settings.hpp"
 
-namespace botsort_v2 {
+namespace botsort {
 
 // One input detection. The mask, when given, is the detector's bbox-local mask
 // (row-major, non-zero = object) of any size; it is only read during update()
@@ -114,4 +114,4 @@ class MultiSourceTracker {
   std::map<int, SourceState> states_;
 };
 
-}  // namespace botsort_v2
+}  // namespace botsort
