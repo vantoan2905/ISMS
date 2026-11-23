@@ -1,0 +1,35 @@
+runtime:
+  max_frame_queue: 3
+  enable_mock_relay: true
+alert_devices:
+  - {type: display, name: factory_screen}
+  - {type: speaker, name: factory_speaker}
+model_config: models.yaml
+storage:
+  path: safety_events.db
+  snapshot_dir: snapshots
+cameras:
+  - id: cam_01
+    source: "rtsp://username:password@192.168.1.101:554/stream1"
+    width: 640
+    height: 480
+    algorithms:
+      - {type: helmet_compliance, confidence_threshold: 0.8}
+      - {type: roi_entry, roi_id: zone_a}
+      - {type: roi_dwell, roi_id: zone_a, threshold_ms: 5000}
+    rois:
+      zone_a: [[0.10, 0.35], [0.90, 0.35], [0.90, 0.95], [0.10, 0.95]]
+  - id: cam_02
+    source: "rtsp://username:password@192.168.1.102:554/stream1"
+    width: 640
+    height: 480
+    algorithms:
+      - {type: roi_entry, roi_id: zone_b}
+    rois:
+      zone_b: [[0.10, 0.40], [0.90, 0.40], [0.90, 0.95], [0.10, 0.95]]
+  - id: cam_03
+    source: "rtsp://username:password@192.168.1.103:554/stream1"
+    width: 480
+    height: 640
+    algorithms:
+      - {type: helmet_compliance, confidence_threshold: 0.8}
