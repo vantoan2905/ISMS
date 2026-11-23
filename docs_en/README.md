@@ -1,5 +1,6 @@
 # English documentation
 
+0. [Setup and deployment](deployment.md)
 1. [Problem approach and system design](00_problem_approach.md)
 2. [Camera algorithm sequences](03_camera_sequences.md)
 3. [Training, model selection and evaluation](04_training_and_evaluation.md)

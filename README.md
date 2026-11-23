@@ -6,6 +6,8 @@ This MVP runs three camera sources through GStreamer, shared RTMO-m pose inferen
 
 ## Setup and run
 
+For detailed setup, API and Docker instructions, see [deployment](docs_en/deployment.md) or [hướng dẫn tiếng Việt](docs_vn/deployment.md).
+
 The configured demo uses the three MP4 files named in `configs/cameras.yaml` and the RTMO-m and EfficientNet-B0 weights configured in `configs/models.yaml`. These files are not included in Git. Update the YAML if your paths differ. Run commands from the project root.
 
 On Debian/Ubuntu, install the GStreamer Python bindings and plugins for the system Python:

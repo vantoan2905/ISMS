@@ -1,5 +1,6 @@
 # Tài liệu flow và đánh giá
 
+0. [Hướng dẫn cài đặt và triển khai](deployment.md)
 1. [Cách tiếp cận và thiết kế hệ thống](00_problem_approach.md)
 2. [Sequence thuật toán từng camera](03_camera_sequences.md)
 3. [Train, test, lý do chọn model và kết quả đánh giá](04_training_and_evaluation.md)
