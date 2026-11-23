@@ -1,0 +1,47 @@
+flowchart TB
+    subgraph sources["Nguồn video / camera"]
+        C1["CAM-01: video 1"]
+        C2["CAM-02: video 2"]
+        C3["CAM-03: video 3"]
+    end
+
+    CFG["Cấu hình camera, ROI và model"]
+    subgraph central["Ứng dụng ISMS"]
+        CM["Camera manager"]
+        GST["GStreamer appsink<br/>decode, chuyển BGR và lấy PTS"]
+        Q["Hàng đợi giới hạn riêng cho từng camera<br/>bỏ frame cũ khi quá tải"]
+        EX["Inference executor dùng chung"]
+        POSE["RTMO-m<br/>bbox người + keypoints"]
+        TRACK["Tracker riêng từng camera"]
+        CROP["Crop vùng đầu từ pose"]
+        HELMET["EfficientNet-B0<br/>HELMET / NO_HELMET / UNKNOWN"]
+        ROI["ROI entry / exit / dwell"]
+        RULES["Observations"]
+        EVENT["Event engine<br/>lifecycle + chống trùng"]
+        OVERLAY["Vẽ bbox, keypoints, ROI và trạng thái"]
+    end
+
+    DB[("SQLite incidents")]
+    SNAP["Snapshot"]
+    RELAY["Mock relay"]
+    API["FastAPI / WebSocket"]
+    DASH["Dashboard"]
+    VIDEO["Video demo MP4"]
+
+    CFG --> CM
+    CM --> GST
+    C1 --> GST
+    C2 --> GST
+    C3 --> GST
+    GST --> Q --> EX --> POSE --> TRACK
+    TRACK --> CROP --> HELMET --> RULES
+    TRACK --> ROI --> RULES
+    RULES --> EVENT
+    EVENT --> DB
+    EVENT --> SNAP
+    EVENT --> RELAY
+    EVENT --> API --> DASH
+    TRACK --> OVERLAY
+    HELMET --> OVERLAY
+    ROI --> OVERLAY
+    RELAY --> OVERLAY --> VIDEO
